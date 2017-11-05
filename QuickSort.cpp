@@ -6,11 +6,18 @@
 
 using namespace std;
 
+namespace global
+{
+	unsigned int swapped = 0;
+}
+
 inline void vertausche(int &a, int &b)
 {
 	int swap = a;
 	a = b;
 	b = swap;
+
+	global::swapped++;
 }
 
 int spalte_auf(int *a, int n1, int n2)
@@ -113,6 +120,7 @@ int main()
 	}
 	output.close();
 
-	cout << "Time to finished: " << ende << endl;
+	cout << "Time to finished: " << ende << "ms" << endl;
+	cout << "Swapped: " << global::swapped << endl;
 	system("pause");
 }
