@@ -39,52 +39,54 @@ int spalte_auf(int *a, int n1, int n2)
 	return tind;
 }
 
-//void quickSort(int *a, int n1, int n2)
-//{
-//	int k = 0;
-//	int li = n1; int re = n2;
-//	while(( li < re) || (k > 0))
-//	{
-//		if (!(li < re))
-//		{
-//			li = kli[k];
-//			re = kre[k];
-//			k--
-//		}
-//		int s = spalte_auf(a, li, re);
-//		if ((re - li) >= 2)
-//		{
-//			if ((s - li) > (re - 2))
-//			{
-//				k = k + 1;
-//				kli[k] = li;
-//				kre[k] = s - 1;
-//				li = s + 1;
-//			}
-//			else
-//			{
-//				k = k + 1;
-//				kli[k] = s + 1;
-//				kre[k] = re;
-//				re = s - 1;
-//			}
-//		}
-//		else
-//			li = re;
-//
-//	}
-//}
-
-
-void quickSortrek(int *a, int n1, int n2)
+void quickSort(int *a, int n1, int n2)
 {
-	if (n1 < n2)
+	int k = 0;
+	int li = n1; int re = n2;
+	int *kli = new kli[n2-n1+1];
+	int *kre = new kli[n2-n1+1];
+	while(( li < re) || (k > 0))
 	{
-		int p = spalte_auf(a, n1, n2);
-		quickSortrek(a, n1, p - 1);
-		quickSortrek(a, p + 1, n2);
+		if (!(li < re))
+		{
+			li = kli[k];
+			re = kre[k];
+			k--
+		}
+		int s = spalte_auf(a, li, re);
+		if ((re - li) >= 2)
+		{
+			if ((s - li) > (re - 2))
+			{
+				k = k + 1;
+				kli[k] = li;
+				kre[k] = s - 1;
+				li = s + 1;
+			}
+			else
+			{
+				k = k + 1;
+				kli[k] = s + 1;
+				kre[k] = re;
+				re = s - 1;
+			}
+		}
+		else
+			li = re;
+
 	}
 }
+
+
+//void quickSortrek(int *a, int n1, int n2)
+//{
+//	if (n1 < n2)
+//	{
+//		int p = spalte_auf(a, n1, n2);
+//		quickSortrek(a, n1, p - 1);
+//		quickSortrek(a, p + 1, n2);
+//	}
+//}
 
 
 
@@ -110,7 +112,7 @@ int main()
 	cout << "Eingelesen: " << index << endl;
 
 	int ende, start = clock();
-	quickSortrek(a, 0, length - 1);
+	quickSort(a, 0, length - 1);
 	ende = ((clock() - start) * 1000) / CLOCKS_PER_SEC;
 
 	ofstream output("output.txt");
